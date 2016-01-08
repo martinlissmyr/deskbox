@@ -1,0 +1,23 @@
+{
+  "name": "deskbox",
+  "version": "0.0.1",
+  "description": "A wrapper for Google Inbox",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atom/electron-quick-start.git"
+  },
+  "keywords": [
+    "desktop",
+    "inbox",
+    "mail",
+    "wrapper"
+  ],
+  "author": "Martin Lissmyr",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}

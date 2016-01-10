@@ -16,7 +16,7 @@ and the built app will be available in `/dist/v0.36.3/` (that's the version of t
 
 ### To bump version and build do:
 * `npm version patch`
-will automatically bump the version in package.json and commit the change, create a tag and build the app
+will automatically bump the version in package.json and commit the change, create a tag, push it and build the app
 
 ### To release do:
 * Make sure everything is commited in master

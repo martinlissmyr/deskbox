@@ -7,6 +7,7 @@
     "start": "electron src/app.js",
     "build": "gulp build",
     "version": "gulp build",
+    "postversion": "git push",
     "release": "gulp release"
   },
   "repository": "github:martinlissmyr/deskbox",

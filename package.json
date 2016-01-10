@@ -2,7 +2,6 @@
   "name": "Inbox",
   "version": "0.0.2",
   "description": "A wrapper for Google Inbox",
-  "main": "src/app.js",
   "scripts": {
     "start": "electron src/app.js",
     "build": "gulp build",

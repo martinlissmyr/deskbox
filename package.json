@@ -1,10 +1,13 @@
 {
   "name": "Inbox",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "A wrapper for Google Inbox",
   "main": "src/app.js",
   "scripts": {
-    "start": "electron src/app.js"
+    "start": "electron src/app.js",
+    "build": "gulp build",
+    "version": "gulp build",
+    "release": "gulp release"
   },
   "repository": "github:martinlissmyr/deskbox",
   "keywords": [
@@ -17,8 +20,10 @@
   "license": "MIT",
   "devDependencies": {
     "electron-prebuilt": "^0.36.3",
-    "electron-packager": "~5.2.0",
     "gulp": "~3.9.0",
-    "gulp-electron": "~0.0.10"
+    "gulp-util": "~3.0.7",
+    "gulp-electron": "latest",
+    "gulp-github-release": "latest",
+    "dotenv": "~1.2.0"
   }
 }

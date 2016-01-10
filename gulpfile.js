@@ -1,7 +1,15 @@
 var gulp = require("gulp");
+var gutil = require("gulp-util");
 var electron = require("gulp-electron");
+var release = require("gulp-github-release");
 var packageJson = require("./package.json");
+var electronVersion = "v0.36.3";
+var platform = "darwin-x64";
 
+// Load env variables
+require("dotenv").load();
+
+// Config build task
 gulp.task("build", function() {
   gulp.src("")
   .pipe(electron({
@@ -9,9 +17,9 @@ gulp.task("build", function() {
     packageJson: packageJson,
     release: "./dist",
     cache: "./cache",
-    version: "v0.36.3",
+    version: electronVersion,
     packaging: true,
-    platforms: ["darwin-x64"],
+    platforms: [platform],
     platformResources: {
       darwin: {
         CFBundleDisplayName: packageJson.name,
@@ -23,4 +31,17 @@ gulp.task("build", function() {
     }
   }))
   .pipe(gulp.dest(""));
+});
+
+// Config release task
+gulp.task("release", function() {
+  if (!process.env.GITHUB_TOKEN) {
+    gutil.log(gutil.colors.red("HALTED: No GITHUB_TOKEN provided in .env"));
+    return;
+  }
+  gulp.src("./dist/" + electronVersion + "/" + packageJson.name + "-" + packageJson.version + "-" + platform + ".zip")
+  .pipe(release({
+    token: process.env.GITHUB_TOKEN,
+    manifest: packageJson
+  }));
 });

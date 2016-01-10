@@ -2,6 +2,8 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+var Menu = require("menu");
+var menuTemplate = require("./menu.js");
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,6 +17,9 @@ function createWindow () {
   });
 
   mainWindow.loadURL("file://" + __dirname + "/inbox.html");
+
+  // Initiate application menu
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {

@@ -45,7 +45,7 @@ gulp.task("release", function() {
     token: process.env.GITHUB_TOKEN,
     owner: githubRepo[0],
     repo: githubRepo[1],
-    notes: "",
+    notes: "This is v" + packageJson.version + " of " + packageJson.name + ". Enjoy!",
     manifest: packageJson
   }));
 });

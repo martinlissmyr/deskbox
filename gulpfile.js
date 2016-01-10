@@ -3,14 +3,23 @@ var gutil = require("gulp-util");
 var electron = require("gulp-electron");
 var release = require("gulp-github-release");
 var packageJson = require("./package.json");
+var del = require("del");
+
 var electronVersion = "v0.36.3";
 var platform = "darwin-x64";
 
 // Load env variables
 require("dotenv").load();
 
+// Config clean task
+gulp.task("clean", function() {
+  return del([
+    "dist/**/*"
+  ]);
+});
+
 // Config build task
-gulp.task("build", function() {
+gulp.task("build", ["clean"], function() {
   gulp.src("")
   .pipe(electron({
     src: "./src",

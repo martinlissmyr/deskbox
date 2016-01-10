@@ -39,9 +39,13 @@ gulp.task("release", function() {
     gutil.log(gutil.colors.red("HALTED: No GITHUB_TOKEN provided in .env"));
     return;
   }
+  var githubRepo = packageJson.repository.replace("github:", "").split("/");
   gulp.src("./dist/" + electronVersion + "/" + packageJson.name + "-" + packageJson.version + "-" + platform + ".zip")
   .pipe(release({
     token: process.env.GITHUB_TOKEN,
+    owner: githubRepo[0],
+    repo: githubRepo[1],
+    notes: "",
     manifest: packageJson
   }));
 });

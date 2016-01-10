@@ -1,15 +1,12 @@
 {
-  "name": "deskbox",
+  "name": "Inbox",
   "version": "0.0.1",
   "description": "A wrapper for Google Inbox",
   "main": "app.js",
   "scripts": {
     "start": "electron app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
-  },
+  "repository": "github:martinlissmyr/deskbox",
   "keywords": [
     "desktop",
     "inbox",
@@ -18,6 +15,9 @@
   ],
   "author": "Martin Lissmyr",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
+    "electron-prebuilt": "^0.36.3",
+    "electron-packager": "~5.2.0",
+    "gulp": "~3.9.0",
+    "gulp-electron": "~0.0.10"
   }
 }

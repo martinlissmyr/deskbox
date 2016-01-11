@@ -1,0 +1,147 @@
+html {
+  height: 100%;
+}
+
+body {
+  overflow:hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "helvetica neue", helvetica, arial;
+}
+
+#container {
+   display: flex;
+   flex-direction: row;
+   height: 100%;
+}
+
+#accounts-navigation-bar {
+  display: none;
+  user-select: none;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+  width: 70px;
+  height: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  background: #263238;
+}
+
+#accounts-navigation {
+  counter-reset: section;
+}
+
+#add-account {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  font-size: 40px;
+  color: #78909C;
+  line-height: 35px;
+  text-align: center;
+  cursor: pointer;
+  opacity: .7;
+}
+
+#add-account:hover {
+  opacity: 1;
+}
+
+#inboxes {
+  height: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.nav-item {
+  display: block;
+  position: relative;
+  margin: 0 0 10px 0;
+  border-radius: 50%;
+  width: 48px;
+  line-height: 48px;
+  background-color: #37474F;
+  border: 2px solid #37474F;
+  background-size: cover;
+  color: #78909C;
+  font-size: 19.5px;
+  text-align: center;
+  font-weight: normal;
+  cursor: pointer;
+  opacity: .7;
+}
+
+.nav-item:hover {
+  opacity: 1;
+}
+
+.nav-item.active {
+  color: #ECEFF1;
+  border-color: #546E7A;
+  background-color: #546E7A;
+  opacity: 1;
+}
+
+.nav-item.has-avatar {
+  color: transparent;
+}
+
+.nav-item:before {
+  counter-increment: section;
+  content: counter(section, upper-alpha);
+}
+
+.nav-item.has-counter:after {
+  display: block;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 21px;
+  line-height: 21px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  background: #FF5722;
+  color: #fff;
+  content: attr(count);
+}
+
+.nav-item-close {
+  background: #fff;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 21px;
+  line-height: 21px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  color: #DD2C00;
+  display: none;
+}
+
+
+.has-multiple-inboxes .nav-item.active:hover .nav-item-close {
+  display: block;
+}
+
+.has-multiple-inboxes .nav-item.active.has-counter:hover:after {
+  display: none;
+}
+
+.inbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  visibility: hidden;
+}
+.inbox.active {
+  visibility: visible;
+}

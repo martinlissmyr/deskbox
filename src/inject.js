@@ -14,3 +14,10 @@ ipc.on("do-unread-count", function() {
   var count = document.getElementsByClassName('ss').length.toString();
   ipc.sendToHost("unread-count-updated", count);
 });
+
+ipc.on("fetch-identity", function() {
+  var avatar = document.querySelector(".gbii");
+  var avatarImage = document.defaultView.getComputedStyle(avatar, null).getPropertyValue("background-image");
+  var email = document.querySelector(".gb_fb .gb_mb").innerText;
+  ipc.sendToHost("fetched-identity", avatarImage, email);
+});

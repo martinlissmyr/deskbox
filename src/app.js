@@ -16,7 +16,7 @@ function createWindow () {
     height: 768
   });
 
-  mainWindow.loadURL("file://" + __dirname + "/inbox.html");
+  mainWindow.loadURL("file://" + __dirname + "/chrome.html");
 
   // Initiate application menu
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));

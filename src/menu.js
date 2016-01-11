@@ -1,5 +1,6 @@
 const electron = require("electron");
 const app = electron.app;
+const BrowserWindow = require("browser-window");
 
 module.exports = [
   {
@@ -48,6 +49,42 @@ module.exports = [
         accelerator: "CmdOrCtrl+A",
         role: "selectall"
       }
+    ]
+  },
+  {
+    label: "View",
+    submenu: [
+      {
+        label: "Toggle multi-account toolbar",
+        accelerator: "CmdOrCtrl+M",
+        click: function() {
+          BrowserWindow.getFocusedWindow().webContents.send("toggle-multiple-account-toolbar");
+        }
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Reload",
+        accelerator: "CmdOrCtrl+R",
+        click: function(item, focusedWindow) {
+          if (focusedWindow)
+            focusedWindow.reload();
+        }
+      },
+      {
+        label: "Toggle Developer Tools",
+        accelerator: (function() {
+          if (process.platform == "darwin")
+            return "Alt+Command+I";
+          else
+            return "Ctrl+Shift+I";
+        })(),
+        click: function(item, focusedWindow) {
+          if (focusedWindow)
+            focusedWindow.toggleDevTools();
+        }
+      },
     ]
   }
 ];

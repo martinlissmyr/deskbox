@@ -3,7 +3,7 @@ const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const windowStateKeeper = require("electron-window-state");
-var Menu = require("menu");
+const Menu = require("menu");
 var menuTemplate = require("./menu.js");
 
 // Keep a global reference of the window object, if you don"t, the window will

@@ -30,6 +30,8 @@ function Inbox(id, navigationContainer, inboxesContainer) {
       this.navigationItem.classList.add("has-avatar");
       this.navigationItem.style.backgroundImage = e.args[0]; // Set avatar as background
       this.navigationItem.setAttribute("title", e.args[1]); // Set email as title
+    } else if (e.channel === "debug") {
+      console.log(e.args[0]);
     }
   }).bind(this));
 

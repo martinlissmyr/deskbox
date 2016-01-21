@@ -1,0 +1,11 @@
+{
+  "name": "deskbox-app",
+  "version": "0.0.0",
+  "main": "app.js",
+  "description": "A wrapper for Google Inbox",
+  "repository": "github:martinlissmyr/deskbox",
+  "license": "MIT",
+  "dependencies": {
+    "electron-window-state": "^2.0.0"
+  }
+}

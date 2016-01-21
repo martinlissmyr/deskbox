@@ -7,8 +7,9 @@ Download the [latest release](https://github.com/martinlissmyr/deskbox/releases/
 ## Develop
 
 ### To get started do:  
-* `npm install`  
-* `npm start`
+* Run `npm install` in the src folder  
+* Run `npm install` in the repository root folder  
+* `npm start` to run the app
 
 ### To build it do:
 * `npm run build`

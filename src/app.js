@@ -2,6 +2,7 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const windowStateKeeper = require("electron-window-state");
 var Menu = require("menu");
 var menuTemplate = require("./menu.js");
 
@@ -10,11 +11,24 @@ var menuTemplate = require("./menu.js");
 let mainWindow;
 
 function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768
+  // Load the previous state with fallback to defaults
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 1024,
+    defaultHeight: 768
   });
+
+  // Create the window using the state information
+  mainWindow = new BrowserWindow({
+    "x": mainWindowState.x,
+    "y": mainWindowState.y,
+    "width": mainWindowState.width,
+    "height": mainWindowState.height
+  });
+
+  // Let us register listeners on the window, so we can update the state
+  // automatically (the listeners will be removed when the window is closed)
+  // and restore the maximized or full screen state
+  mainWindowState.manage(mainWindow);
 
   mainWindow.loadURL("file://" + __dirname + "/chrome.html");
 
@@ -29,7 +43,7 @@ function createWindow () {
     mainWindow = null;
   });
 
-  // Let's prevent events such as drag and drop to trigger in the host window
+  // Let"s prevent events such as drag and drop to trigger in the host window
   // We want them to trigger in the webview instead
   mainWindow.webContents.on("will-navigate", function(e) {
     e.preventDefault();

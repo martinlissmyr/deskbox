@@ -6,6 +6,7 @@
   "repository": "github:martinlissmyr/deskbox",
   "license": "MIT",
   "dependencies": {
-    "electron-window-state": "^2.0.0"
+    "electron-window-state": "^2.0.0",
+    "configstore": "^1.0.0"
   }
 }

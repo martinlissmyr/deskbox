@@ -5,7 +5,7 @@ var release = require("gulp-github-release");
 var packageJson = require("./package.json");
 var del = require("del");
 
-var electronVersion = "v0.36.3";
+var electronVersion = "v" + packageJson.devDependencies["electron-prebuilt"];
 var platform = "darwin-x64";
 
 // Load env variables

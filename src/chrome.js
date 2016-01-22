@@ -1,6 +1,7 @@
-var remote = require("electron").remote;
-var Inbox = require("./inbox.js");
+const remote = require("electron").remote;
+const Inbox = require("./inbox.js");
 const ipcRenderer = require("electron").ipcRenderer;
+var config = require("./config.js");
 
 // Get persisted settings
 var storedInboxIds = getStoredInboxes();
@@ -90,11 +91,11 @@ function activateFirstInbox() {
 }
 
 function persistInboxes() {
-  localStorage.setItem("stored-inboxes", JSON.stringify(storedInboxIds));
+  config.set("stored-inboxes", storedInboxIds);
 }
 
 function getStoredInboxes() {
-  return JSON.parse(localStorage.getItem("stored-inboxes")) || [];
+  return config.get("stored-inboxes") || [];
 }
 
 function setMultipleInboxesState() {
@@ -128,9 +129,9 @@ function hideNavigationBar() {
 }
 
 function getNavigationBarStatus() {
-  return localStorage.getItem("navigation-bar-status");
+  return config.get("navigation-bar-status");
 }
 
 function persistNavigationBarStatus() {
-  localStorage.setItem("navigation-bar-status", navigationBarIsShowing ? "visible" : "hidden");
+  config.set("navigation-bar-status", navigationBarIsShowing ? "visible" : "hidden");
 }

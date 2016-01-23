@@ -35,6 +35,24 @@ ipc.on("do-unread-count", function() {
   ipc.sendToHost("unread-count-updated", count);
 });
 
+// Listen for "open compose window" events
+ipc.on("open-compose-window", function(e, options) {
+  var composeButton = document.querySelector(".y.hC");
+  composeButton.click();
+  setTimeout(function() {
+    // Wait a few milliseconds to allow composer to open
+    if (options) {
+      if (options.address) {
+        var addressField = document.querySelector(".lS.eF input");
+        addressField.value = options.address;
+      }
+    }
+    var subjectField = document.querySelector(".iO input");
+    subjectField.focus();
+  }, 200);
+});
+
+// Listen to "fetch identity" events
 ipc.on("fetch-identity", function() {
   var avatar = document.querySelector(".gbii");
   var avatarImage = document.defaultView.getComputedStyle(avatar, null).getPropertyValue("background-image");

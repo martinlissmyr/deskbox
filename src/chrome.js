@@ -9,6 +9,7 @@ var navigationBarIsShowing = getNavigationBarStatus() == "visible" ? true : fals
 
 // Set up base vars
 var inboxes = {};
+var currentInbox = null;
 var inboxesContainer = document.getElementById("inboxes");
 var navigationBar = document.getElementById("accounts-navigation-bar");
 var navigationContainer = document.getElementById("accounts-navigation");
@@ -55,6 +56,14 @@ ipcRenderer.on("toggle-multiple-account-toolbar", function(e) {
   }
 });
 
+ipcRenderer.on("mailto", function(e, address) {
+  if (currentInbox);
+  currentInbox.openComposeWindow({
+    address: address
+  });
+});
+
+
 function generateId() {
   return "" + (new Date()).valueOf().toString();
 }
@@ -87,7 +96,8 @@ function initiateInboxes() {
 }
 
 function activateFirstInbox() {
-  inboxes[Object.keys(inboxes)[0]].activate();
+  currentInbox = inboxes[Object.keys(inboxes)[0]];
+  currentInbox.activate();
 }
 
 function persistInboxes() {
@@ -114,6 +124,7 @@ function activateInbox(id) {
       inboxes[inboxId].activate();
     }
   }
+  currentInbox = inboxes[inboxId];
 }
 
 function showNavigationBar() {

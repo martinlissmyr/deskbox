@@ -25,11 +25,10 @@ function createWindow () {
     "height": mainWindowState.height
   });
 
-  // Let us register listeners on the window, so we can update the state
-  // automatically (the listeners will be removed when the window is closed)
-  // and restore the maximized or full screen state
+  // Handle resizes etc
   mainWindowState.manage(mainWindow);
 
+  // Load chrome
   mainWindow.loadURL("file://" + __dirname + "/chrome.html");
 
   // Initiate application menu
@@ -50,9 +49,29 @@ function createWindow () {
   });
 }
 
+// Handle mailto system events
+function openMailtoLink(address) {
+  var win = BrowserWindow.getFocusedWindow(); // Get the currently focused window
+  if (win) {
+    win.webContents.send("mailto", address);
+  } else {
+    setTimeout(function() {
+      openMailtoLink(address); // Try again in a second
+    }, 1000);
+  }
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on("ready", createWindow);
+
+// Emitted when the application has finished basic startup.
+app.on("will-finish-launching", function() {
+  app.on("open-url", function(e, url) {
+    openMailtoLink(url.replace("mailto:", ""));
+    e.preventDefault();
+  });
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {

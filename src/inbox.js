@@ -94,6 +94,22 @@ Inbox.prototype.triggerUnreadCheck = function() {
   this.unreadCheckTimer = setTimeout(this.triggerUnreadCheck.bind(this), 3000);
 }
 
+Inbox.prototype.openComposeWindow = function(options) {
+  if (this.webview.isLoading()) {
+    // We're not done loading, hold on...
+    this.webview.addEventListener("dom-ready", (function() {
+      // Ok, webview has loaded, wait an extra second to make sure
+      // The Inbox JS app is rendered
+      setTimeout((function() {
+        this.webview.send("open-compose-window", options);
+      }).bind(this), 1000);
+    }).bind(this));
+  } else {
+    // We're already up and running, fire away...
+    this.webview.send("open-compose-window", options);
+  }
+}
+
 Inbox.prototype.triggerFetchIdentity = function() {
   this.webview.send("fetch-identity");
 }

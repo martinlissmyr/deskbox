@@ -22,7 +22,8 @@
     "electron-prebuilt": "0.36.5",
     "gulp": "~3.9.0",
     "gulp-util": "~3.0.7",
-    "gulp-electron": "latest",
+    "archiver": "~0.21.0",
+    "electron-packager": "latest",
     "gulp-github-release": "latest",
     "dotenv": "~1.2.0",
     "del": "~2.0.0"

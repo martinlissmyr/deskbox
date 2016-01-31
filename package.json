@@ -19,7 +19,7 @@
   "author": "Martin Lissmyr",
   "license": "MIT",
   "devDependencies": {
-    "electron-prebuilt": "0.36.5",
+    "electron-prebuilt": "0.36.7",
     "gulp": "~3.9.0",
     "gulp-util": "~3.0.7",
     "archiver": "~0.21.0",

@@ -1,17 +1,25 @@
-var shell = require("electron").shell;
+const remote = require("electron").remote;
+const shell = require("electron").shell;
+const session = remote.require("session");
 
 function Inbox(id, navigationContainer, inboxesContainer) {
   this.id = id;
   this.isActive = false;
+  this.sessionName = "persist:inbox" + this.id;
   this.navigationItem = this.createNavigationItem(navigationContainer);
   this.navigationCloseButton = this.createNavigationCloseButton();
   this.webview = this.createInboxWebview(inboxesContainer);
 
-  this.webview.addEventListener("dom-ready", (function() {
+  // Set download path to current users Downloads folder
+  session.fromPartition(this.sessionName).setDownloadPath(process.env.HOME + "/Downloads");
+
+  // Wait for Google Inbox to load
+  this.webview.addEventListener("dom-ready", (function(e) {
     this.triggerFetchIdentity();
     this.triggerUnreadCheck();
   }).bind(this));
 
+  // Listen to messages from injected js
   this.webview.addEventListener("ipc-message", (function(e) {
     if (e.channel === "external-link-clicked") {
       // Make sure external links are opened in a browser
@@ -35,6 +43,7 @@ function Inbox(id, navigationContainer, inboxesContainer) {
     }
   }).bind(this));
 
+  // Send navigation item clicks to the chrome
   this.navigationItem.addEventListener("click", (function(e) {
     var e = new CustomEvent("navigation-event", {
       "detail": {
@@ -44,6 +53,7 @@ function Inbox(id, navigationContainer, inboxesContainer) {
     navigationContainer.dispatchEvent(e);
   }).bind(this));
 
+  // Send close button clicks to the chrome
   this.navigationCloseButton.addEventListener("click", (function(e) {
     var e = new CustomEvent("close-inbox", {
       "detail": {
@@ -58,7 +68,7 @@ function Inbox(id, navigationContainer, inboxesContainer) {
 Inbox.prototype.createInboxWebview = function(parent) {
   var webview = document.createElement("webview");
   webview.setAttribute("preload", "inject.js");
-  webview.setAttribute("partition", "persist:inbox" + this.id);
+  webview.setAttribute("partition", this.sessionName);
   webview.setAttribute("src", "http://inbox.google.com");
   webview.setAttribute("id", "inbox-" + this.id);
   webview.setAttribute("class", "inbox");

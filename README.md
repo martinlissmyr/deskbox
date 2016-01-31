@@ -13,7 +13,7 @@ Download the [latest release](https://github.com/martinlissmyr/deskbox/releases/
 
 ### To build it do:
 * `npm run build`
-and the built app will be available in `/dist/v0.36.3/` (that's the version of the Electron app)
+and the built app will be available in `/dist/`
 
 ### To bump version and build do:
 * `npm version patch`

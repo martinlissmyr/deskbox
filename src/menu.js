@@ -7,6 +7,10 @@ module.exports = [
     label: "Application",
     submenu: [
       {
+        label: "About " + app.getName(),
+        role: "about"
+      },
+      {
         label: "Quit",
         accelerator: "Command+Q",
         click: function() { app.quit(); }
@@ -43,6 +47,13 @@ module.exports = [
         label: "Paste",
         accelerator: "CmdOrCtrl+V",
         role: "paste"
+      },
+      {
+        label: "Paste and Match Style",
+        accelerator: "Shift+CmdOrCtrl+V",
+        click: function() {
+          BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
+        }
       },
       {
         label: "Select All",

@@ -7,7 +7,7 @@ module.exports = [
     label: "Application",
     submenu: [
       {
-        label: "About " + app.getName(),
+        label: "About",
         role: "about"
       },
       {

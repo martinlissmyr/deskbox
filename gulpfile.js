@@ -65,6 +65,22 @@ gulp.task("build", ["clean"], function(done) {
   });
 });
 
+gulp.task("sync-package-files", function(done) {
+  var srcPackageJson = require("./src/package.json");
+  srcPackageJson.version = packageJson.version;
+  srcPackageJson.name = packageJson.name;
+  srcPackageJson.description = packageJson.description;
+  srcPackageJson.repository = packageJson.repository;
+  fs.writeFile("./src/package.json", JSON.stringify(srcPackageJson, null, 2), function(err) {
+    if (err) {
+      gutil.log(gutil.colors.red(err));
+    } else {
+      gutil.log(gutil.colors.green("PACKAGE FILES SYNCED!"));
+    }
+    done();
+  });
+});
+
 gulp.task("create-autoupdater-file", function(done) {
   var autoUpdaterJson = {
     "url": "https://github.com/" + githubUser + "/" + githubRepo + "/releases/download/v" + appVersion + "/" + zipFileName,

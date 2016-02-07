@@ -5,7 +5,7 @@
   "scripts": {
     "start": "electron src/app.js",
     "build": "gulp build",
-    "version": "gulp build && gulp create-autoupdater-file && git add auto_updater.json",
+    "version": "gulp sync-package-files && git add src/package.json && gulp build && gulp create-autoupdater-file && git add auto_updater.json",
     "postversion": "git push",
     "release": "gulp release"
   },

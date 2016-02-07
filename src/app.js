@@ -4,7 +4,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const windowStateKeeper = require("electron-window-state");
 const Menu = require("menu");
-var menuTemplate = require("./menu.js");
+const menuTemplate = require("./menu.js");
+const autoUpdate = require("./auto-updater.js");
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,6 +34,9 @@ function createWindow () {
 
   // Initiate application menu
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+
+  // Run auto update
+  autoUpdate(app, mainWindow);
 
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {

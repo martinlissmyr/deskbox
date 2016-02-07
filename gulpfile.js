@@ -42,6 +42,7 @@ gulp.task("build", ["clean"], function(done) {
     "dir": sourceDir,
     "out": outputDir,
     "overwrite": true,
+    "asar": true,
     "name": appName,
     "app-bundle-id": appName,
     "helper-bundle-id": appName,

@@ -27,6 +27,12 @@ gulp.task("clean", function() {
 
 // Config build task
 gulp.task("build", ["clean"], function(done) {
+  if (!process.env.DEVELOPER_IDENTITY) {
+    gutil.log(gutil.colors.red("HALTED: No DEVELOPER_IDENTITY provided in .env"));
+    done();
+    return;
+  }
+
   packager({
     "arch": architecture,
     "platform": platform,
@@ -40,6 +46,7 @@ gulp.task("build", ["clean"], function(done) {
     "app-version": appVersion,
     "build-version": appVersion,
     "icon": "resources/icon.icns",
+    "sign": process.env.DEVELOPER_IDENTITY,
     "protocols": [
       {
         "name": "Send Email",
@@ -75,6 +82,7 @@ gulp.task("compress", function(done) {
 gulp.task("release", ["compress"], function() {
   if (!process.env.GITHUB_TOKEN) {
     gutil.log(gutil.colors.red("HALTED: No GITHUB_TOKEN provided in .env"));
+    done();
     return;
   }
   var githubRepo = packageJson.repository.replace("github:", "").split("/");

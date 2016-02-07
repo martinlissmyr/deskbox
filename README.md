@@ -15,6 +15,8 @@ Download the [latest release](https://github.com/martinlissmyr/deskbox/releases/
 * `npm run build`
 and the built app will be available in `/dist/`
 
+In order to build you need to have a [developer license](https://developer.apple.com/account/mac/certificate/certificateList.action) installed in your keychain. You also need to set your `DEVELOPER_IDENTITY` in a .env file in the root.
+
 ### To bump version and build do:
 * `npm version patch`
 will automatically bump the version in package.json and commit the change, create a tag, push it and build the app

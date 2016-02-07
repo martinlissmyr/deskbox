@@ -87,7 +87,7 @@ gulp.task("create-autoupdater-file", function(done) {
     "pub_date": (new Date()).toISOString(),
     "name": appName
   }
-  fs.writeFile("./auto_updater.json", JSON.stringify(autoUpdaterJson), function(err) {
+  fs.writeFile("./auto_updater.json", JSON.stringify(autoUpdaterJson, null, 2), function(err) {
     if (err) {
       gutil.log(gutil.colors.red(err));
     } else {

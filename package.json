@@ -5,9 +5,9 @@
   "scripts": {
     "start": "electron src/app.js",
     "build": "gulp build",
-    "version": "gulp sync-package-files && git add src/package.json && gulp build && gulp create-autoupdater-file && git add auto_updater.json",
+    "version": "gulp sync-package-files && git add src/package.json && gulp build",
     "postversion": "git push",
-    "release": "gulp release"
+    "release": "gulp create-autoupdater-file && git add auto_updater.json && git commit -m 'Updates auto updater file' && gulp release"
   },
   "repository": "github:martinlissmyr/deskbox",
   "keywords": [

@@ -11,6 +11,9 @@ module.exports = [
         role: "about"
       },
       {
+        type: "separator"
+      },
+      {
         label: "Quit",
         accelerator: "Command+Q",
         click: function() { app.quit(); }
@@ -46,14 +49,14 @@ module.exports = [
       {
         label: "Paste",
         accelerator: "CmdOrCtrl+V",
-        role: "paste"
-      },
-      {
-        label: "Paste and Match Style",
-        accelerator: "Shift+CmdOrCtrl+V",
         click: function() {
           BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
         }
+      },
+      {
+        label: "Paste and Maintain Style",
+        accelerator: "Shift+CmdOrCtrl+V",
+        role: "paste"
       },
       {
         label: "Select All",

@@ -14,6 +14,9 @@ var sourceDir = "./src";
 var appName = packageJson.name;
 var appVersion = packageJson.version;
 var zipFileName = appName + "-" + appVersion + ".zip";
+var githubUri = packageJson.repository.replace("github:", "").split("/");
+var githubUser = githubUri[0];
+var githubRepo = githubUri[1];
 
 // Load env variables
 require("dotenv").load();
@@ -61,6 +64,22 @@ gulp.task("build", ["clean"], function(done) {
   });
 });
 
+gulp.task("create-autoupdater-file", function(done) {
+  var autoUpdaterJson = {
+    "url": "https://github.com/" + githubUser + "/" + githubRepo + "/releases/download/v" + appVersion + "/" + zipFileName,
+    "pub_date": (new Date()).toISOString(),
+    "name": appName
+  }
+  fs.writeFile("./auto_updater.json", JSON.stringify(autoUpdaterJson), function(err) {
+    if (err) {
+      gutil.log(gutil.colors.red(err));
+    } else {
+      gutil.log(gutil.colors.green("AUTO UPDATER FILE CREATED!"));
+    }
+    done();
+  });
+});
+
 gulp.task("compress", function(done) {
   var zipPath = outputDir + "/" + zipFileName;
   var archive = archiver("zip");
@@ -85,13 +104,12 @@ gulp.task("release", ["compress"], function() {
     done();
     return;
   }
-  var githubRepo = packageJson.repository.replace("github:", "").split("/");
   gulp.src(outputDir + "/" + zipFileName)
   .pipe(release({
     token: process.env.GITHUB_TOKEN,
-    owner: githubRepo[0],
-    repo: githubRepo[1],
-    notes: "This is v" + packageJson.version + " of " + packageJson.name + ". Enjoy!",
+    owner: githubUser,
+    repo: githubRepo,
+    notes: "This is v" + appVersion + " of " + appName + ". Enjoy!",
     manifest: packageJson
   }));
 });

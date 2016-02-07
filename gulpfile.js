@@ -5,7 +5,6 @@ const release = require("gulp-github-release");
 const packageJson = require("./package.json");
 const fs = require("fs");
 const del = require("del");
-const archiver = require("archiver");
 
 var architecture = "x64";
 var platform = "darwin";
@@ -97,25 +96,8 @@ gulp.task("create-autoupdater-file", function(done) {
   });
 });
 
-gulp.task("compress", function(done) {
-  var zipPath = outputDir + "/" + zipFileName;
-  var archive = archiver("zip");
-  var output = fs.createWriteStream(zipPath);
-  output.on("close", function () {
-    gutil.log(gutil.colors.green("ZIP CREATED! File can be found here: " + zipPath));
-    done();
-  });
-  archive.on("error", function (err) {
-    gutil.log(gutil.colors.red(err));
-    done();
-  });
-  archive.pipe(output);
-  archive.directory((outputDir + "/" + appName + "-" + platform + "-" + architecture), false);
-  archive.finalize();
-});
-
 // Config release task
-gulp.task("release", ["compress"], function() {
+gulp.task("release", function() {
   if (!process.env.GITHUB_TOKEN) {
     gutil.log(gutil.colors.red("HALTED: No GITHUB_TOKEN provided in .env"));
     done();

@@ -7,7 +7,9 @@
     "build": "gulp build",
     "version": "gulp sync-package-files && git add src/package.json && gulp build",
     "postversion": "git push",
-    "release": "gulp create-autoupdater-file && git add auto_updater.json && git commit -m 'Updates auto updater file' && git push && gulp release"
+    "compress": "cd dist && ditto -c -k --sequesterRsrc --keepParent ./$npm_package_name-darwin-x64 ./$npm_package_name-$npm_package_version.zip && cd ..",
+    "create-autoupdater-file": "gulp create-autoupdater-file && git add auto_updater.json && git commit -m 'Updates auto updater file' && git push",
+    "release": "npm run compress && npm run create-autoupdater-file && gulp release"
   },
   "repository": "github:martinlissmyr/deskbox",
   "keywords": [
@@ -22,7 +24,6 @@
     "electron-prebuilt": "0.36.7",
     "gulp": "~3.9.0",
     "gulp-util": "~3.0.7",
-    "archiver": "~0.21.0",
     "electron-packager": "latest",
     "gulp-github-release": "latest",
     "dotenv": "~1.2.0",

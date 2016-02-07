@@ -4,3 +4,4 @@ node_modules
 src/node_modules
 dist
 cache
+npm-debug.log

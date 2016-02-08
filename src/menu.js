@@ -1,6 +1,7 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = require("browser-window");
+const packageJson = require("./package.json");
 
 module.exports = [
   {
@@ -8,7 +9,10 @@ module.exports = [
     submenu: [
       {
         label: "About",
-        role: "about"
+        click: function() {
+          var repo = packageJson.repository.replace("github:", "");
+          electron.shell.openExternal("https://github.com/" + repo + "/releases/tag/v" + packageJson.version);
+        }
       },
       {
         type: "separator"

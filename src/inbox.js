@@ -19,6 +19,13 @@ function Inbox(id, navigationContainer, inboxesContainer) {
     this.triggerUnreadCheck();
   }).bind(this));
 
+  // Make sure the active inbox not loose focus
+  this.webview.addEventListener("blur", (function(e) {
+    if (this.isActive) {
+      this.focus();
+    }
+  }).bind(this));
+
   // Listen to messages from injected js
   this.webview.addEventListener("ipc-message", (function(e) {
     if (e.channel === "external-link-clicked") {
@@ -134,10 +141,17 @@ Inbox.prototype.setNavigationItemBadge = function(count) {
   }
 }
 
+Inbox.prototype.focus = function() {
+  setTimeout((function() {
+    this.webview.focus();
+  }).bind(this), 100);
+}
+
 Inbox.prototype.activate = function() {
   this.isActive = true;
   this.navigationItem.classList.add("active");
   this.webview.classList.add("active");
+  this.focus();
 }
 
 Inbox.prototype.inActivate = function() {

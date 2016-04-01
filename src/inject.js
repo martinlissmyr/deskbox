@@ -56,6 +56,6 @@ ipc.on("open-compose-window", function(e, options) {
 ipc.on("fetch-identity", function() {
   var avatar = document.querySelector(".gbii");
   var avatarImage = document.defaultView.getComputedStyle(avatar, null).getPropertyValue("background-image");
-  var email = document.querySelector(".gb_fb .gb_mb").innerText;
+  var email = document.querySelector(".gb_ob").innerText;
   ipc.sendToHost("fetched-identity", avatarImage, email);
 });

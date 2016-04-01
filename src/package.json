@@ -1,6 +1,6 @@
 {
   "name": "Inbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "app.js",
   "description": "A wrapper for Google Inbox",
   "repository": "github:martinlissmyr/deskbox",

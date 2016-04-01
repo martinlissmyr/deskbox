@@ -49,7 +49,11 @@ gulp.task("build", ["clean"], function(done) {
     "app-version": appVersion,
     "build-version": appVersion,
     "icon": "resources/icon.icns",
-    "sign": process.env.DEVELOPER_IDENTITY,
+    "osx-sign": {
+      "platform": "darwin",
+      "identity": process.env.DEVELOPER_IDENTITY,
+      "verbose": true
+    },
     "protocols": [
       {
         "name": "Send Email",

@@ -1,6 +1,6 @@
 const electron = require("electron");
 const app = electron.app;
-const BrowserWindow = require("browser-window");
+const BrowserWindow = electron.BrowserWindow;
 const packageJson = require("./package.json");
 
 module.exports = [

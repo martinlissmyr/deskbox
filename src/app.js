@@ -3,7 +3,7 @@ const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const windowStateKeeper = require("electron-window-state");
-const Menu = require("menu");
+const Menu = electron.Menu;
 const menuTemplate = require("./menu.js");
 const autoUpdate = require("./auto-updater.js");
 

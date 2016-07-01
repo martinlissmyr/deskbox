@@ -1,6 +1,6 @@
 const remote = require("electron").remote;
 const shell = require("electron").shell;
-const session = remote.require("session");
+const session = remote.require("electron").session;
 
 function Inbox(id, navigationContainer, inboxesContainer) {
   this.id = id;

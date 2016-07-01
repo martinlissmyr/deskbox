@@ -53,9 +53,7 @@ module.exports = [
       {
         label: "Paste",
         accelerator: "CmdOrCtrl+V",
-        click: function() {
-          BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
-        }
+        role: "pasteandmatchstyle"
       },
       {
         label: "Paste and Maintain Style",

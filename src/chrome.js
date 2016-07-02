@@ -1,6 +1,7 @@
 const remote = require("electron").remote;
 const Inbox = require("./inbox.js");
 const ipcRenderer = require("electron").ipcRenderer;
+const dialog = remote.require("electron").dialog;
 var config = require("./config.js");
 
 // Get persisted settings
@@ -35,7 +36,18 @@ navigationContainer.addEventListener("navigation-event", function(e) {
 
 // Listen for closing of an inbox
 navigationContainer.addEventListener("close-inbox", function(e) {
-  removeInbox(e.detail.id);
+  var confirmation = dialog.showMessageBox(
+    remote.getCurrentWindow(),
+    {
+      type: "question",
+      buttons: ["Yes, remove it!", "Eh, no!"],
+      title: "Confirm",
+      message: "Are you sure you want to remove this account button?"
+    }
+  );
+  if (confirmation === 0) {
+    removeInbox(e.detail.id);
+  }
 });
 
 // Listen for unread count updates for the active inbox

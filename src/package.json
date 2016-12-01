@@ -6,8 +6,8 @@
   "repository": "github:martinlissmyr/deskbox",
   "license": "MIT",
   "dependencies": {
-    "electron-window-state": "^3.0.3",
-    "configstore": "^2.0.0",
-    "electron-gh-releases": "^2.0.0"
+    "electron-window-state": "^4.0.0",
+    "configstore": "^2.1.0",
+    "electron-gh-releases": "^2.0.4"
   }
 }

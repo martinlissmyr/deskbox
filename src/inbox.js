@@ -127,6 +127,38 @@ Inbox.prototype.openComposeWindow = function(options) {
   }
 }
 
+Inbox.prototype.openReminderWindow = function() {
+  if (this.webview.isLoading()) {
+    // We're not done loading, hold on...
+    this.webview.addEventListener("dom-ready", (function() {
+      // Ok, webview has loaded, wait an extra second to make sure
+      // The Inbox JS app is rendered
+      setTimeout((function() {
+        this.webview.send("open-reminder-window");
+      }).bind(this), 1000);
+    }).bind(this));
+  } else {
+    // We're already up and running, fire away...
+    this.webview.send("open-reminder-window");
+  }
+}
+
+Inbox.prototype.gotoFolder = function(folderName) {
+  if (this.webview.isLoading()) {
+    // We're not done loading, hold on...
+    this.webview.addEventListener("dom-ready", (function() {
+      // Ok, webview has loaded, wait an extra second to make sure
+      // The Inbox JS app is rendered
+      setTimeout((function() {
+        this.webview.send("goto-folder-" + folderName);
+      }).bind(this), 1000);
+    }).bind(this));
+  } else {
+    // We're already up and running, fire away...
+    this.webview.send("goto-folder-" + folderName);
+  }
+}
+
 Inbox.prototype.triggerFetchIdentity = function() {
   this.webview.send("fetch-identity");
 }

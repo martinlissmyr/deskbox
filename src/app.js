@@ -6,6 +6,7 @@ const windowStateKeeper = require("electron-window-state");
 const Menu = electron.Menu;
 const menuTemplate = require("./menu.js");
 const autoUpdate = require("./auto-updater.js");
+const touchBar = require("./touchbar");
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -31,6 +32,9 @@ function createWindow () {
 
   // Load chrome
   mainWindow.loadURL("file://" + __dirname + "/chrome.html");
+
+  // Add touchbar
+  mainWindow.setTouchBar(touchBar);
 
   // Initiate application menu
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));

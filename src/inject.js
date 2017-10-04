@@ -52,6 +52,30 @@ ipc.on("open-compose-window", function(e, options) {
   }, 200);
 });
 
+// Listen for "open reminder window" events
+ipc.on("open-reminder-window", function(e, options) {
+  var reminderButton = document.querySelector(".o8");
+  reminderButton.click();
+});
+
+// Listen for "goto-folder-inbox" events
+ipc.on("goto-folder-inbox", function(e) {
+  var button = document.querySelector(".oin9Fc.cN");
+  button.click();
+});
+
+// Listen for "goto-folder-snoozed" events
+ipc.on("goto-folder-snoozed", function(e) {
+  var button = document.querySelector(".navIconUpcoming");
+  button.click();
+});
+
+// Listen for "goto-folder-done" events
+ipc.on("goto-folder-done", function(e) {
+  var button = document.querySelector(".navIconDone");
+  button.click();
+});
+
 // Listen to "fetch identity" events
 ipc.on("fetch-identity", function() {
   var avatar = document.querySelector(".gbii");

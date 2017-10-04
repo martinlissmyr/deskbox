@@ -69,12 +69,42 @@ ipcRenderer.on("toggle-multiple-account-toolbar", function(e) {
 });
 
 ipcRenderer.on("mailto", function(e, address) {
-  if (currentInbox);
-  currentInbox.openComposeWindow({
-    address: address
-  });
+  if (currentInbox) {
+    currentInbox.openComposeWindow({
+      address: address
+    });
+  }
 });
 
+ipcRenderer.on("open-compose-window", function(e) {
+  if (currentInbox) {
+    currentInbox.openComposeWindow();
+  }
+});
+
+ipcRenderer.on("open-reminder-window", function(e) {
+  if (currentInbox) {
+    currentInbox.openReminderWindow();
+  }
+});
+
+ipcRenderer.on("goto-inbox", function(e) {
+  if (currentInbox) {
+    currentInbox.gotoFolder("inbox");
+  }
+});
+
+ipcRenderer.on("goto-snoozed", function(e) {
+  if (currentInbox) {
+    currentInbox.gotoFolder("snoozed");
+  }
+});
+
+ipcRenderer.on("goto-done", function(e) {
+  if (currentInbox) {
+    currentInbox.gotoFolder("done");
+  }
+});
 
 function generateId() {
   return "" + (new Date()).valueOf().toString();

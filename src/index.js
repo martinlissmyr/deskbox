@@ -5,8 +5,8 @@ const BrowserWindow = electron.BrowserWindow;
 const windowStateKeeper = require("electron-window-state");
 const Menu = electron.Menu;
 const menuTemplate = require("./menu.js");
-const autoUpdate = require("./auto-updater.js");
 const touchBar = require("./touchbar");
+const autoUpdater = require("electron-updater").autoUpdater;
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -39,9 +39,6 @@ function createWindow () {
   // Initiate application menu
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
-  // Run auto update
-  autoUpdate(app, mainWindow);
-
   // Emitted when the window is closed.
   mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows
@@ -68,6 +65,9 @@ function openMailtoLink(address) {
     }, 1000);
   }
 }
+
+// Check for updates
+autoUpdater.checkForUpdatesAndNotify()
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -2,14 +2,25 @@
   "name": "Inbox",
   "version": "0.1.8",
   "description": "A wrapper for Google Inbox",
+  "build": {
+    "appId": "com.electron.${name}",
+    "publish": [{
+      "provider": "github",
+      "owner": "martinlissmyr",
+      "repo": "deskbox"
+    }],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "identity": "",
+      "icon": "resources/icon.icns"
+    }
+  },
+  "main": "./src/index.js",
   "scripts": {
-    "start": "electron src/app.js",
-    "build": "gulp build",
-    "version": "gulp sync-package-files && git add src/package.json && gulp build",
-    "postversion": "git push",
-    "compress": "cd dist && ditto -c -k --sequesterRsrc --keepParent ./$npm_package_name-darwin-x64 ./$npm_package_name-$npm_package_version.zip && cd ..",
-    "create-autoupdater-file": "gulp create-autoupdater-file && git add auto_updater.json && git commit -m 'Updates auto updater file' && git push",
-    "release": "npm run compress && npm run create-autoupdater-file && gulp release"
+    "start": "electron src/index.js",
+    "build": "electron-builder --dir",
+    "dist": "electron-builder",
+    "publish": "build --mac -p always"
   },
   "repository": "github:martinlissmyr/deskbox",
   "keywords": [
@@ -22,10 +33,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "1.6.16",
-    "gulp": "~3.9.0",
-    "gulp-util": "~3.0.7",
-    "electron-packager": "latest",
-    "gulp-github-release": "latest",
+    "electron-builder": "latest",
     "dotenv": "~2.0.0",
     "del": "~2.2.2"
   }

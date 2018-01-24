@@ -12,17 +12,18 @@ Download the [latest release](https://github.com/martinlissmyr/deskbox/releases/
 * `npm start` to run the app
 
 ### To build it do:
-* `npm run build`
+* `npm run dist`
 and the built app will be available in `/dist/`
 
-In order to build you need to have a [developer license](https://developer.apple.com/account/mac/certificate/certificateList.action) installed in your keychain. You also need to set your `DEVELOPER_IDENTITY` in a .env file in the root.
+In order to build you need to have a [developer license](https://developer.apple.com/account/mac/certificate/certificateList.action) installed in your keychain. You also need to set your `identity` in the package.json file.
 
-### To bump version and build do:
+### To bump version:
 * `npm version patch`
-will automatically bump the version in package.json and commit the change, create a tag, push it and build the app
+will automatically bump the version in package.json
 
 ### To release do:
 * Make sure everything is commited in master
-* Make sure you've bumped version and built the app
-* `npm run release`
- will create a release on Github, tag it and upload the app binary corresponding to the version in package.json
+* Make sure you've bumped version
+* Do `export GH_TOKEN="<YOUR_TOKEN_HERE>"`
+* `npm run publish`
+* Release the release on GitHub by going to https://github.com/martinlissmyr/deskbox/releases, editing the release and clicking "Publish release."
